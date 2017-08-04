@@ -1,4 +1,4 @@
-%% prepro_csv across days for 1 mouse
+%% prepro_csv 1 day for 1 or more mice
 
 date = input('Date (MMDDYYYY): ','s');
 root_dir = uigetdir;

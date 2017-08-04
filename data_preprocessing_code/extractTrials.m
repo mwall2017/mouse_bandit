@@ -56,6 +56,7 @@ allTrialIndices = sort([leftTrialIndices,rightTrialIndices]);
     % 5: right port reward probability
     % 6: left port reward probability
     % 7: reward given (1 / 0)
+    % 8: laser stim given (1 / 0)
 trials = zeros(numTrials,4);
 
 % time since last trial
@@ -89,9 +90,19 @@ for i = 1:numTrials
     trials(i,6) = allTrialPokes(i).leftPortStats.prob;
 end
 
-%finally, the rewards:
+% the rewards:
 leftrewards = stats.rewards.left(leftTrialIndices);
 rightrewards = stats.rewards.right(rightTrialIndices);
 
 trials(righttrials,7) = rightrewards;
 trials(lefttrials,7) = leftrewards;
+
+% the laser stim:
+%for i = 1:length(pokeHistory)
+%if pokeHistory(i).isTRIAL == 2;
+%laser_stim(i) = pokeHistory(i).laser;
+
+%trials(:,8) = laser_stim;
+end
+
+
