@@ -2,7 +2,7 @@
 Created on Wed Nov 16 20:32:48 2016
 
 @author: shayneufeld
-modified for opto by mikewallace 7/13/17
+modified for opto by mikewallace 7/13/17 and 8/28/17 to add info about laser trials in the past 10
 This file contains preprocessing functions to create feature dataframes
 for our AC209A project modeling the 2-armed bandit task in mice
 """
@@ -31,9 +31,9 @@ def create_feature_matrix(trials,n_indi,mouse_id,session_id,feature_names='Defau
     n_trials = trials.shape[0] #number of trials in this session
     
     if curr_trial_duration is True:
-        num_cols = 2 + 3+ 4*n_indi+ 1 + 5 + 1
+        num_cols = 2 + 3+ 5*n_indi+ 1 + 5 + 1
     else:
-        num_cols = 2 + 3+ 4*n_indi+ 1 + 5
+        num_cols = 2 + 3+ 5*n_indi+ 1 + 5
     #2 streak cols, 3 trial & block & reward trial col, 4 cols for each past trial, 
     #]1 for current trial + 5 decision/switch/higher p port/Reward/Laser
     feature_matrix = np.zeros((n_trials-n_indi,num_cols))
@@ -183,6 +183,10 @@ def create_feature_matrix(trials,n_indi,mouse_id,session_id,feature_names='Defau
             #trial time
             feature_matrix[j,k] = past_trial['Trial Duration (s)']
             k += 1
+            
+            #laser given
+            feature_matrix[j,k] = past_trial['Laser Given']
+            k += 1
         
         '''
         CURRENT TRIAL
@@ -248,16 +252,16 @@ def create_feature_matrix(trials,n_indi,mouse_id,session_id,feature_names='Defau
                             'Block Reward',
                             'Port Streak',
                             'Reward Streak',
-                            '10_Port','10_Reward','10_ITI','10_trialDuration',
-                            '9_Port','9_Reward','9_ITI','9_trialDuration',
-                            '8_Port','8_Reward','8_ITI','8_trialDuration',
-                            '7_Port','7_Reward','7_ITI','7_trialDuration',
-                            '6_Port','6_Reward','6_ITI','6_trialDuration',
-                            '5_Port','5_Reward','5_ITI','5_trialDuration',
-                            '4_Port','4_Reward','4_ITI','4_trialDuration',
-                            '3_Port','3_Reward','3_ITI','3_trialDuration',
-                            '2_Port','2_Reward','2_ITI','2_trialDuration',
-                            '1_Port','1_Reward','1_ITI','1_trialDuration',
+                            '10_Port','10_Reward','10_ITI','10_trialDuration', '10_laser',
+                            '9_Port','9_Reward','9_ITI','9_trialDuration', '9_laser',
+                            '8_Port','8_Reward','8_ITI','8_trialDuration', '8_laser',
+                            '7_Port','7_Reward','7_ITI','7_trialDuration', '7_laser',
+                            '6_Port','6_Reward','6_ITI','6_trialDuration', '6_laser',
+                            '5_Port','5_Reward','5_ITI','5_trialDuration', '5_laser',
+                            '4_Port','4_Reward','4_ITI','4_trialDuration', '4_laser',
+                            '3_Port','3_Reward','3_ITI','3_trialDuration', '3_laser',
+                            '2_Port','2_Reward','2_ITI','2_trialDuration', '2_laser',
+                            '1_Port','1_Reward','1_ITI','1_trialDuration', '1_laser',
                             '0_ITI','0_trialDuration',
                             'Decision',
                             'Switch',
@@ -272,16 +276,16 @@ def create_feature_matrix(trials,n_indi,mouse_id,session_id,feature_names='Defau
                             'Block Reward',
                             'Port Streak',
                             'Reward Streak',
-                            '10_Port','10_Reward','10_ITI','10_trialDuration',
-                            '9_Port','9_Reward','9_ITI','9_trialDuration',
-                            '8_Port','8_Reward','8_ITI','8_trialDuration',
-                            '7_Port','7_Reward','7_ITI','7_trialDuration',
-                            '6_Port','6_Reward','6_ITI','6_trialDuration',
-                            '5_Port','5_Reward','5_ITI','5_trialDuration',
-                            '4_Port','4_Reward','4_ITI','4_trialDuration',
-                            '3_Port','3_Reward','3_ITI','3_trialDuration',
-                            '2_Port','2_Reward','2_ITI','2_trialDuration',
-                            '1_Port','1_Reward','1_ITI','1_trialDuration',
+                            '10_Port','10_Reward','10_ITI','10_trialDuration', '10_laser',
+                            '9_Port','9_Reward','9_ITI','9_trialDuration', '9_laser',
+                            '8_Port','8_Reward','8_ITI','8_trialDuration', '8_laser',
+                            '7_Port','7_Reward','7_ITI','7_trialDuration', '7_laser',
+                            '6_Port','6_Reward','6_ITI','6_trialDuration', '6_laser',
+                            '5_Port','5_Reward','5_ITI','5_trialDuration', '5_laser',
+                            '4_Port','4_Reward','4_ITI','4_trialDuration', '4_laser',
+                            '3_Port','3_Reward','3_ITI','3_trialDuration', '3_laser',
+                            '2_Port','2_Reward','2_ITI','2_trialDuration', '2_laser',
+                            '1_Port','1_Reward','1_ITI','1_trialDuration', '1_laser',
                             '0_ITI',
                             'Decision',
                             'Switch',
